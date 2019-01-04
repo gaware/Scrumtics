@@ -1,0 +1,54 @@
+USE [INFRA]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[VotacaoTarefa](
+	[Id] [numeric](10, 0) IDENTITY NOT NULL,
+	[Id_tarefa] [numeric](10, 0) NOT NULL,
+	[Id_usuario] [numeric](10, 0) NOT NULL,
+	[Tempo] [numeric](3, 0) NOT NULL,
+ CONSTRAINT [VotacaoTarefa_Id] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[VotacaoTarefa]  WITH CHECK ADD  CONSTRAINT [FK_VotacaoTarefa_Tarefa] FOREIGN KEY([Id_tarefa])
+REFERENCES [dbo].[TarefaAtividade] ([Id])
+GO
+
+ALTER TABLE [dbo].[VotacaoTarefa] CHECK CONSTRAINT [FK_VotacaoTarefa_Tarefa]
+GO
+
+ALTER TABLE [dbo].[VotacaoTarefa]  WITH CHECK ADD  CONSTRAINT [FK_VotacaoTarefa_Usuario] FOREIGN KEY([Id_usuario])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+
+ALTER TABLE [dbo].[VotacaoTarefa] CHECK CONSTRAINT [FK_VotacaoTarefa_Usuario]
+GO
+
+CREATE NONCLUSTERED INDEX [VotacaoTarefa_Tarefa] ON [dbo].[VotacaoTarefa]
+(
+	[Id_tarefa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+
+CREATE NONCLUSTERED INDEX [VotacaoTarefa_Usuario] ON [dbo].[VotacaoTarefa]
+(
+	[Id_usuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [VotacaoTarefa_Tarefa_Usuario] ON [dbo].[VotacaoTarefa]
+(
+	[Id_tarefa] ASC,
+	[Id_usuario] ASC	
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+GO
