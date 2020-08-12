@@ -1,7 +1,7 @@
 # Scrumtics
 Organize o seu planning poker e obtenha as estatísticas da equipe.
 
-É compatível com o home office...
+[É compatível com o home office...]
 
 Projeto tecnológico em sistemas para internet pela [Ulbra](https://www.ulbra.br/ead/graduacao/ead/sistemas-para-internet/superior-de-tecnologia).
 
